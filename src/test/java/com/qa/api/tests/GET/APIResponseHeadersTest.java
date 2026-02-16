@@ -1,0 +1,39 @@
+package com.qa.api.tests.GET;
+import client.ApiClient;
+import com.microsoft.playwright.APIResponse;
+import com.microsoft.playwright.options.HttpHeader;
+import com.qa.api.tests.base.BaseApiTest;
+import config.ConfigReader;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.util.List;
+import java.util.Map;
+
+public class APIResponseHeadersTest extends BaseApiTest {
+    ApiClient client;
+    @BeforeMethod
+    public void initClient() {
+        client = new ApiClient(requestContext);
+    }
+
+    @Test
+    public void getHeadersTest(){
+        APIResponse apiResponse = client.get(ConfigReader.getProperty("users"));
+        int statusCode = apiResponse.status();
+        Assert.assertEquals(statusCode, 200);
+        //using map:
+       Map<String, String> headersMap =  apiResponse.headers();
+        headersMap.forEach((k,v) -> System.out.println(k + ":" + v));
+        System.out.println("total response headers: " + headersMap.size());
+        Assert.assertEquals(headersMap.get("server"), "cloudflare");
+        Assert.assertEquals(headersMap.get("content-type"), "application/json; charset=utf-8");
+        System.out.println("===============================");
+        //using list:
+       List<HttpHeader> headersList = apiResponse.headersArray();
+        for(HttpHeader e : headersList){
+            System.out.println(e.name + " : " + e.value);
+        }
+    }
+}
