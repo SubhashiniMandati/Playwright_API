@@ -12,11 +12,6 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 public class UpdateUserPUTCallWithPOJOLombokTest extends BaseApiTest {
-    ApiClient client;
-    @BeforeMethod
-    public void initClient() {
-        client = new ApiClient(requestContext);
-    }
 
     //1. post - user id = 123
     //2. put - user id - /123

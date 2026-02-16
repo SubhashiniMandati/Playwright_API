@@ -15,15 +15,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CreateUserPostCallTest extends BaseApiTest {
-    ApiClient client;
     static String emailId;
     public static String getRandomEmail(){
         emailId = "testpwautomation"+ System.currentTimeMillis() + "@gmail.com";
         return emailId;
-    }
-    @BeforeMethod
-    public void initClient() {
-        client = new ApiClient(requestContext);
     }
 
     @Test

@@ -15,11 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GETAPICall extends BaseApiTest {
-    ApiClient client;
-    @BeforeMethod
-    public void initClient() {
-        client = new ApiClient(requestContext);
-    }
 
     @Test
     public void getSpecificUserApiTest() throws IOException {

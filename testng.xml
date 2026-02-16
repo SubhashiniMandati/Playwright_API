@@ -1,0 +1,18 @@
+<suite name="Grid Suite" parallel="tests" thread-count="4">
+
+    <test name="API Tests">
+<!--        <groups>-->
+<!--            <run>-->
+<!--                <include name="smoke"/>-->
+<!--            </run>-->
+<!--        </groups>-->
+        <classes>
+            <class name="com.qa.api.tests.DELETE.DeleteUserAPITest"/>
+            <class name="com.qa.api.tests.GET.APIResponseHeadersTest"/>
+            <class name="com.qa.api.tests.GET.GETAPICall"/>
+            <class name="com.qa.api.tests.POST.CreateUserPostCallTest"/>
+            <class name="com.qa.api.tests.POST.CreateUserPostCallWithPojoLombokTest"/>
+            <class name="com.qa.api.tests.PUT.UpdateUserPUTCallWithPOJOLombokTest"/>
+        </classes>
+    </test>
+</suite>

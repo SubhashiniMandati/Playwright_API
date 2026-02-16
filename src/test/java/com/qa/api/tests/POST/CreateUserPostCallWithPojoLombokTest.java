@@ -13,12 +13,6 @@ import java.io.IOException;
 
 public class CreateUserPostCallWithPojoLombokTest extends BaseApiTest {
     static String emailId;
-    ApiClient client;
-    @BeforeMethod
-    public void initClient() {
-        client = new ApiClient(requestContext);
-    }
-
     public static String getRandomEmail(){
         emailId = "testpwautomation"+ System.currentTimeMillis() + "@gmail.com";
         return emailId;

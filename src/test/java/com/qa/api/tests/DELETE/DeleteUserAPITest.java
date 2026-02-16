@@ -7,16 +7,13 @@ import com.microsoft.playwright.APIResponse;
 import com.qa.api.tests.base.BaseApiTest;
 import config.ConfigReader;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import java.io.IOException;
 
 public class DeleteUserAPITest extends BaseApiTest {
-    ApiClient client;
-    @BeforeMethod
-    public void initClient() {
-        client = new ApiClient(requestContext);
-    }
     //1. create a user -- user id -- 201
     //2. delete user -- user id -- 204
     //3. get user -- user id -- 404
@@ -28,7 +25,7 @@ public class DeleteUserAPITest extends BaseApiTest {
         return emailId;
     }
 
-    @Test
+    @Test(groups = {"smoke"})
     public void deleteUserTest() throws IOException {
 
         //1. create users object: using builder pattern:

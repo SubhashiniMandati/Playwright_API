@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class ApiClient {
 
-    private APIRequestContext context;
+    protected APIRequestContext context;
 
     public ApiClient(APIRequestContext context) {
         this.context = context;

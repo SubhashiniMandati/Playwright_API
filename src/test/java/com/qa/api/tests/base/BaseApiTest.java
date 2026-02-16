@@ -1,12 +1,11 @@
 package com.qa.api.tests.base;
 
+import client.ApiClient;
 import com.microsoft.playwright.APIRequest;
 import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.Playwright;
 import config.ConfigReader;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 
 import java.util.Map;
 
@@ -14,6 +13,7 @@ public class BaseApiTest {
     protected  Playwright playwright;
     protected  APIRequest request;
     protected  APIRequestContext requestContext;
+    protected ApiClient client;
 
     static String emailId;
 
@@ -23,9 +23,10 @@ public class BaseApiTest {
 //        request =  playwright.request();
 //        requestContext = request.newContext();
 //    }
-    @BeforeTest
+    @BeforeClass
     public void setupNew() {
         playwright = Playwright.create();
+
 
         requestContext = playwright.request().newContext(
                 new APIRequest.NewContextOptions()
@@ -35,10 +36,11 @@ public class BaseApiTest {
                                 "Authorization",  ConfigReader.getProperty("token")
                         ))
         );
+        client = new ApiClient(requestContext);
     }
 
 
-    @AfterTest
+    @AfterClass
     public void tearDown(){
         requestContext.dispose();
         playwright.close();

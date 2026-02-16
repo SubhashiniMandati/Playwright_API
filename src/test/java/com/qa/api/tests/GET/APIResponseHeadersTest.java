@@ -5,6 +5,7 @@ import com.microsoft.playwright.options.HttpHeader;
 import com.qa.api.tests.base.BaseApiTest;
 import config.ConfigReader;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -12,13 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 public class APIResponseHeadersTest extends BaseApiTest {
-    ApiClient client;
-    @BeforeMethod
-    public void initClient() {
-        client = new ApiClient(requestContext);
-    }
 
-    @Test
+    @Test(groups = {"smoke"})
     public void getHeadersTest(){
         APIResponse apiResponse = client.get(ConfigReader.getProperty("users"));
         int statusCode = apiResponse.status();

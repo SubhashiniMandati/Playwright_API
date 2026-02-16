@@ -20,12 +20,6 @@ public class CreateUserWithJsonFileTest extends BaseApiTest {
         emailId = "testpwautomation"+ System.currentTimeMillis() + "@gmail.com";
         return emailId;
     }
-
-    ApiClient client;
-    @BeforeMethod
-    public void initClient() {
-        client = new ApiClient(requestContext);
-    }
     @Test
     public void createUserTest() throws IOException {
         //get json file:
