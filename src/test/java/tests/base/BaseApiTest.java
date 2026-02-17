@@ -8,7 +8,7 @@ import config.ConfigReader;
 import org.testng.annotations.*;
 
 import java.util.Map;
-
+@Listeners(listeners.TestListener.class)
 public class BaseApiTest {
     protected  Playwright playwright;
     protected  APIRequestContext requestContext;
