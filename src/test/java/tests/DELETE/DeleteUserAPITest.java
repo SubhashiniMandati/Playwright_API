@@ -9,7 +9,6 @@ import config.ConfigReader;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.io.IOException;
-import java.util.Optional;
 
 public class DeleteUserAPITest extends BaseApiTest {
     //1. create a user -- user id -- 201

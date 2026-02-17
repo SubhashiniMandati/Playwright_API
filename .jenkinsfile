@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'Maven3'
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/SubhashiniMandati/Playwright_API.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+
+        stage('Run API Tests') {
+            steps {
+                sh 'mvn test -DsuiteXmlFile=testng.xml'
+            }
+        }
+
+        stage('Publish Report') {
+            steps {
+                junit 'target/surefire-reports/*.xml'
+            }
+        }
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'reports/**/*.*'
+        }
+        failure {
+            echo 'Build Failed'
+        }
+    }
+}
