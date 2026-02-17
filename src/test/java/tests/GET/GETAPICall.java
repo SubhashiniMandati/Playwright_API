@@ -19,7 +19,7 @@ public class GETAPICall extends BaseApiTest {
         Map<String, String> params = new HashMap<String, String>();
         params.put("gender", "male");
         params.put("status", "active");
-        APIResponse apiResponse = client.get(ConfigReader.getProperty("users"), params);
+        APIResponse apiResponse = getClient().get(ConfigReader.getProperty("users"), params);
         int statusCode = apiResponse.status();
         System.out.println("response status code: " + statusCode);
         Assert.assertEquals(statusCode, 200);
@@ -38,7 +38,7 @@ public class GETAPICall extends BaseApiTest {
 
     @Test
     public void getUsersApiTest() throws IOException {
-        APIResponse apiResponse = client.get(ConfigReader.getProperty("users"));
+        APIResponse apiResponse = getClient().get(ConfigReader.getProperty("users"));
        int statusCode = apiResponse.status();
        System.out.println("response status code: " + statusCode);
         Assert.assertEquals(statusCode, 200);

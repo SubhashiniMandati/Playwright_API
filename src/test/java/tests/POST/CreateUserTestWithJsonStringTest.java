@@ -29,7 +29,7 @@ public class CreateUserTestWithJsonStringTest extends BaseApiTest {
                 "}";
 
         //POST Call: create a user
-        APIResponse apiPostResponse = client.post(ConfigReader.getProperty("users"),reqJsonBody);
+        APIResponse apiPostResponse = getClient().post(ConfigReader.getProperty("users"),reqJsonBody);
         System.out.println(apiPostResponse.status());
         Assert.assertEquals(apiPostResponse.status(), 201);
         Assert.assertEquals(apiPostResponse.statusText(), "Created");
@@ -45,7 +45,7 @@ public class CreateUserTestWithJsonStringTest extends BaseApiTest {
         //GET Call: Fetch the same user by id:
         System.out.println("===============get call response============");
         APIResponse apiGetResponse =
-                requestContext.get(ConfigReader.getProperty("v2Users")+"/"+ userId,
+                getRequestContext().get(ConfigReader.getProperty("v2Users")+"/"+ userId,
                         RequestOptions.create()
                                 .setHeader("Authorization", ConfigReader.getProperty("token")));
         Assert.assertEquals(apiGetResponse.status(), 200);

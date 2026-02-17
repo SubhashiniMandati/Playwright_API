@@ -9,6 +9,7 @@ import config.ConfigReader;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.io.IOException;
+import java.util.Optional;
 
 public class DeleteUserAPITest extends BaseApiTest {
     //1. create a user -- user id -- 201
@@ -33,7 +34,7 @@ public class DeleteUserAPITest extends BaseApiTest {
                 .status("active").build();
 
         //POST Call: create a user
-        APIResponse apiPostResponse = client.post(ConfigReader.getProperty("users"),users);
+        APIResponse apiPostResponse = getClient().post(ConfigReader.getProperty("users"),users);
         ExtentTestManager.getTest().info("URL "+apiPostResponse.url());
         ExtentTestManager.getTest().info(String.valueOf("Status "+apiPostResponse.status()));
         Assert.assertEquals(apiPostResponse.status(), 201);
@@ -49,14 +50,14 @@ public class DeleteUserAPITest extends BaseApiTest {
         ExtentTestManager.getTest().info(userId);
 
         //2. delete user -- user id -- 204
-        APIResponse apiDELETEResponse = client.delete(ConfigReader.getProperty("users")+"/"+userId);
+        APIResponse apiDELETEResponse = getClient().delete(ConfigReader.getProperty("users")+"/"+userId);
         ExtentTestManager.getTest().info("apiDELETEResponse "+String.valueOf(apiDELETEResponse.status()));
         ExtentTestManager.getTest().info("statusText "+apiDELETEResponse.statusText());
         Assert.assertEquals(apiDELETEResponse.status(), 204);
         System.out.println("delete user response body ====" + apiDELETEResponse.text());
 
         //3. get user -- user id -- 404
-        APIResponse apiResponse = client.get(ConfigReader.getProperty("users")+"/"+userId);
+        APIResponse apiResponse = getClient().get(ConfigReader.getProperty("users")+"/"+userId);
         System.out.println(apiResponse.text());
         int statusCode = apiResponse.status();
         ExtentTestManager.getTest().info("GetstatusCode "+String.valueOf(statusCode));

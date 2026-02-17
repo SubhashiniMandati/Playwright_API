@@ -31,7 +31,7 @@ public class UpdateUserPUTCallWithPOJOLombokTest extends BaseApiTest {
                 .status("active").build();
 
         //1. POST Call: create a user
-        APIResponse apiPostResponse = client.post(ConfigReader.getProperty("users"),user);
+        APIResponse apiPostResponse = getClient().post(ConfigReader.getProperty("users"),user);
         System.out.println(apiPostResponse.url());
         System.out.println(apiPostResponse.status());
         Assert.assertEquals(apiPostResponse.status(), 201);
@@ -59,7 +59,7 @@ public class UpdateUserPUTCallWithPOJOLombokTest extends BaseApiTest {
         System.out.println("---------------PUT CALL----------------");
 
         //2. PUT Call - update user:
-        APIResponse apiPUTResponse = client.put(ConfigReader.getProperty("users")+"/" + userId,user);
+        APIResponse apiPUTResponse = getClient().put(ConfigReader.getProperty("users")+"/" + userId,user);
         System.out.println(apiPUTResponse.status() + " : " + apiPUTResponse.statusText());
         Assert.assertEquals(apiPUTResponse.status(), 200);
         String putResponseText = apiPUTResponse.text();
@@ -71,7 +71,7 @@ public class UpdateUserPUTCallWithPOJOLombokTest extends BaseApiTest {
         System.out.println("---------------GET CALL----------------");
 
         //3. Get the updates user with GET CALL:
-        APIResponse apiGETResponse = client.get(ConfigReader.getProperty("users")+"/"+userId);
+        APIResponse apiGETResponse = getClient().get(ConfigReader.getProperty("users")+"/"+userId);
         System.out.println(apiGETResponse.url());
         int statusCode = apiGETResponse.status();
         System.out.println("response status code: " + statusCode);

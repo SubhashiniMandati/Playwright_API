@@ -1,19 +1,26 @@
 package listeners;
 
-import org.testng.ITestListener;
-import org.testng.ITestResult;
+import com.aventstack.extentreports.*;
+import org.testng.*;
 import reports.ExtentManager;
 import reports.ExtentTestManager;
-import com.aventstack.extentreports.*;
+
 
 public class TestListener implements ITestListener {
 
-    ExtentReports extent = ExtentManager.getInstance();
+    private static ExtentReports extent = ExtentManager.getInstance();
 
     @Override
     public void onTestStart(ITestResult result) {
-        ExtentTest test = extent.createTest(result.getMethod().getMethodName());
-        ExtentTestManager.setTest(test);
+
+//        ExtentTest test01 = extent.createTest(result.getMethod().getMethodName());
+//        ExtentTestManager.setTest(test01);
+        if(ExtentTestManager.getTest()==null){
+            ExtentTest test =
+                    ExtentManager.getInstance().createTest(result.getMethod().getMethodName());
+
+            ExtentTestManager.setTest(test);
+        }
     }
 
     @Override
@@ -27,12 +34,7 @@ public class TestListener implements ITestListener {
     }
 
     @Override
-    public void onTestSkipped(ITestResult result) {
-        ExtentTestManager.getTest().skip("Test Skipped");
-    }
-
-    @Override
-    public void onFinish(org.testng.ITestContext context) {
+    public void onFinish(ITestContext context) {
         extent.flush();
     }
 }

@@ -10,29 +10,54 @@ import org.testng.annotations.*;
 import java.util.Map;
 @Listeners(listeners.TestListener.class)
 public class BaseApiTest {
-    protected  Playwright playwright;
-    protected  APIRequestContext requestContext;
-    protected ApiClient client;
+    private static ThreadLocal<Playwright> playwright = new ThreadLocal<>();
+    private static ThreadLocal<APIRequestContext> requestContext = new ThreadLocal<>();
+    private static ThreadLocal<ApiClient> client = new ThreadLocal<>();
 
     @BeforeClass(alwaysRun = true)
     public void setupNew() {
-        playwright = Playwright.create();
+        playwright.set(Playwright.create());
 
 
-        requestContext = playwright.request().newContext(
-                new APIRequest.NewContextOptions()
-                        .setBaseURL(ConfigReader.getProperty("baseUrl"))
-                        .setExtraHTTPHeaders(Map.of(
-                                "Content-Type", "application/json",
-                                "Authorization",  ConfigReader.getProperty("token")
-                        ))
+        requestContext.set(
+                playwright.get().request().newContext(
+                        new APIRequest.NewContextOptions()
+                                .setBaseURL(ConfigReader.getProperty("baseUrl"))
+                                .setExtraHTTPHeaders(Map.of(
+                                        "Content-Type", "application/json",
+                                        "Authorization", ConfigReader.getProperty("token")
+                                ))
+                )
         );
-        client = new ApiClient(requestContext);
+
+        client.set(new ApiClient(requestContext.get()));
     }
 
     @AfterClass
     public void tearDown(){
-        requestContext.dispose();
-        playwright.close();
+        if (requestContext.get() != null) {
+            requestContext.get().dispose();
+            requestContext.remove();
+        }
+
+        if (playwright.get() != null) {
+            playwright.get().close();
+            playwright.remove();
+        }
+
+        client.remove();
+    }
+    // ===== Getters for child tests =====
+
+    protected Playwright getPlaywright() {
+        return playwright.get();
+    }
+
+    protected APIRequestContext getRequestContext() {
+        return requestContext.get();
+    }
+
+    protected ApiClient getClient() {
+        return client.get();
     }
 }

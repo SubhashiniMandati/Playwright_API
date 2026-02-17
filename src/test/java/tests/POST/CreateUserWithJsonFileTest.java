@@ -26,7 +26,7 @@ public class CreateUserWithJsonFileTest extends BaseApiTest {
         fileBytes = Files.readAllBytes(file.toPath());
 
         //POST Call: create a user
-        APIResponse apiPostResponse = client.post(ConfigReader.getProperty("users"),fileBytes);
+        APIResponse apiPostResponse = getClient().post(ConfigReader.getProperty("users"),fileBytes);
         Assert.assertEquals(apiPostResponse.status(), 201);
         Assert.assertEquals(apiPostResponse.statusText(), "Created");
         System.out.println(apiPostResponse.text());
@@ -40,7 +40,7 @@ public class CreateUserWithJsonFileTest extends BaseApiTest {
         //GET Call: Fetch the same user by id:
         System.out.println("===============get call response============");
         APIResponse apiGetResponse =
-                requestContext.get(ConfigReader.getProperty("v2Users")+"/"+ userId,
+                getRequestContext().get(ConfigReader.getProperty("v2Users")+"/"+ userId,
                         RequestOptions.create()
                                 .setHeader("Authorization", ConfigReader.getProperty("token")));
         Assert.assertEquals(apiGetResponse.status(), 200);

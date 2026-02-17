@@ -26,7 +26,7 @@ public class CreateUserPostCallWithPojoLombokTest extends BaseApiTest {
                     .status("active").build();
 
         //POST Call: create a user
-        APIResponse apiPostResponse = client.post(ConfigReader.getProperty("users"),user);
+        APIResponse apiPostResponse = getClient().post(ConfigReader.getProperty("users"),user);
         System.out.println(apiPostResponse.url());
         System.out.println(apiPostResponse.status());
         Assert.assertEquals(apiPostResponse.status(), 201);

@@ -14,7 +14,7 @@ public class APIResponseHeadersTest extends BaseApiTest {
 
     @Test(groups = {"smoke"})
     public void getHeadersTest(){
-        APIResponse apiResponse = client.get(ConfigReader.getProperty("users"));
+        APIResponse apiResponse = getClient().get(ConfigReader.getProperty("users"));
         int statusCode = apiResponse.status();
         Assert.assertEquals(statusCode, 200);
         //using map:

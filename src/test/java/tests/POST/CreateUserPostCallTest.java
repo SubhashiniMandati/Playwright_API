@@ -28,7 +28,7 @@ public class CreateUserPostCallTest extends BaseApiTest {
         data.put("status", "active");
 
         //POST Call: create a user
-        APIResponse apiPostResponse = client.post(ConfigReader.getProperty("users"),data);
+        APIResponse apiPostResponse = getClient().post(ConfigReader.getProperty("users"),data);
         System.out.println(apiPostResponse.status());
         Assert.assertEquals(apiPostResponse.status(), 201);
         Assert.assertEquals(apiPostResponse.statusText(), "Created");
@@ -43,7 +43,7 @@ public class CreateUserPostCallTest extends BaseApiTest {
 
         //GET Call: Fetch the same user by id:
         System.out.println("===============get call response============");
-        APIResponse apiGetResponse = client.get(ConfigReader.getProperty("users")+"/"+ userId);
+        APIResponse apiGetResponse = getClient().get(ConfigReader.getProperty("users")+"/"+ userId);
             Assert.assertEquals(apiGetResponse.status(), 200);
             Assert.assertEquals(apiGetResponse.statusText(), "OK");
             System.out.println(apiGetResponse.text());
