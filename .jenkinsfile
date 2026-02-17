@@ -9,7 +9,9 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/SubhashiniMandati/Playwright_API.git'
+            git branch: 'master',
+            url: 'https://github.com/SubhashiniMandati/Playwright_API.git'
+
             }
         }
 
