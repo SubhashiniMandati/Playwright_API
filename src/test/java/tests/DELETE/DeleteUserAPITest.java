@@ -1,15 +1,11 @@
-package com.qa.api.tests.DELETE;
+package tests.DELETE;
 
-import client.ApiClient;
 import com.api.data.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.playwright.APIResponse;
-import com.qa.api.tests.base.BaseApiTest;
+import tests.base.BaseApiTest;
 import config.ConfigReader;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import java.io.IOException;
 
@@ -25,7 +21,7 @@ public class DeleteUserAPITest extends BaseApiTest {
         return emailId;
     }
 
-    @Test(groups = {"smoke"})
+    @Test(groups = "smoke")
     public void deleteUserTest() throws IOException {
 
         //1. create users object: using builder pattern:

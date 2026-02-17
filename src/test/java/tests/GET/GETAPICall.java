@@ -1,13 +1,11 @@
-package com.qa.api.tests.GET;
+package tests.GET;
 
-import client.ApiClient;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.playwright.APIResponse;
-import com.qa.api.tests.base.BaseApiTest;
+import tests.base.BaseApiTest;
 import config.ConfigReader;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.IOException;

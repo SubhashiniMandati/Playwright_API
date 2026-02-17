@@ -1,12 +1,9 @@
-package com.qa.api.tests.GET;
-import client.ApiClient;
+package tests.GET;
 import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.options.HttpHeader;
-import com.qa.api.tests.base.BaseApiTest;
+import tests.base.BaseApiTest;
 import config.ConfigReader;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;

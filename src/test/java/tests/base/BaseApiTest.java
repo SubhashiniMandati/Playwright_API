@@ -1,4 +1,4 @@
-package com.qa.api.tests.base;
+package tests.base;
 
 import client.ApiClient;
 import com.microsoft.playwright.APIRequest;
@@ -11,19 +11,10 @@ import java.util.Map;
 
 public class BaseApiTest {
     protected  Playwright playwright;
-    protected  APIRequest request;
     protected  APIRequestContext requestContext;
     protected ApiClient client;
 
-    static String emailId;
-
-//    @BeforeTest
-//    public void setup(){
-//        playwright = Playwright.create();
-//        request =  playwright.request();
-//        requestContext = request.newContext();
-//    }
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void setupNew() {
         playwright = Playwright.create();
 
@@ -38,7 +29,6 @@ public class BaseApiTest {
         );
         client = new ApiClient(requestContext);
     }
-
 
     @AfterClass
     public void tearDown(){
